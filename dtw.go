@@ -16,13 +16,6 @@ func DynamicTimeWarping[NUMERIC Numeric](a, b []NUMERIC) uint64 {
 	}
 	matrix[0][0] = 0
 
-	for _, row := range matrix {
-		for _, cell := range row {
-			print(cell, " ")
-		}
-		println()
-	}
-
 	for i := 0; i < len(a); i++ {
 		for j := 0; j < len(b); j++ {
 			changeMin(&matrix[i+1][j+1], matrix[i][j])
@@ -30,13 +23,6 @@ func DynamicTimeWarping[NUMERIC Numeric](a, b []NUMERIC) uint64 {
 			changeMin(&matrix[i+1][j+1], matrix[i][j+1])
 			matrix[i+1][j+1] += distance(a[i], b[j])
 		}
-	}
-
-	for _, row := range matrix {
-		for _, cell := range row {
-			print(cell, " ")
-		}
-		println()
 	}
 
 	return matrix[len(a)][len(b)]
